@@ -127,16 +127,17 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: IUseAuth) => {
     }
 
     useEffect(() => {
+        const defaultRedirect = '/ruta-predeterminada'; // Coloca aquí la ruta que prefieres usar como predeterminada.
+    
         if (middleware === 'guest' && redirectIfAuthenticated && user)
-            router.push(redirectIfAuthenticated)
+            router.push(redirectIfAuthenticated);
         if (
             window.location.pathname === '/verify-email' &&
             user?.email_verified_at
         )
-            router.push(redirectIfAuthenticated)
-        if (middleware === 'auth' && error) logout()
-    }, [user, error])
-
+            router.push(redirectIfAuthenticated !== undefined ? redirectIfAuthenticated : defaultRedirect);
+        if (middleware === 'auth' && error) logout();
+    }, [user, error]);
     return {
         user,
         register,
