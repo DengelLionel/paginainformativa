@@ -12,10 +12,10 @@ const UpdatePasswordForm = () => {
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<any>()
     const [status, setStatus] = useState<string | null>(null)
 
-    const submitForm: FormEventHandler = async (event) => {
+    const submitForm: FormEventHandler = async event => {
         event.preventDefault()
 
         await csrf()
@@ -24,7 +24,11 @@ const UpdatePasswordForm = () => {
         setStatus(null)
 
         axios
-            .put('/api/password', { current_password: currentPassword, password: password, password_confirmation: passwordConfirmation })
+            .put('/api/password', {
+                current_password: currentPassword,
+                password: password,
+                password_confirmation: passwordConfirmation,
+            })
             .then(response => setStatus(response.data.status))
             .catch(error => {
                 if (error.response.status !== 422) throw error
@@ -41,7 +45,8 @@ const UpdatePasswordForm = () => {
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Ensure your account is using a long, random password to stay secure.
+                    Ensure your account is using a long, random password to stay
+                    secure.
                 </p>
             </header>
 
@@ -53,12 +58,17 @@ const UpdatePasswordForm = () => {
                         id="current_password"
                         type="password"
                         className="block mt-1 w-full"
-                        onChange={event => setCurrentPassword(event.target.value)}
+                        onChange={event =>
+                            setCurrentPassword(event.target.value)
+                        }
                         required
                         autoComplete="current_password"
                     />
 
-                    <InputError messages={errors.current_password} className="mt-2" />
+                    <InputError
+                        messages={errors.current_password}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div>
@@ -75,17 +85,24 @@ const UpdatePasswordForm = () => {
                     <InputError messages={errors.password} className="mt-2" />
                 </div>
                 <div>
-                    <Label htmlFor="password_confirmation">Confirm Password</Label>
+                    <Label htmlFor="password_confirmation">
+                        Confirm Password
+                    </Label>
                     <Input
                         id="password_confirmation"
                         type="password"
                         className="block mt-1 w-full"
-                        onChange={event => setPasswordConfirmation(event.target.value)}
+                        onChange={event =>
+                            setPasswordConfirmation(event.target.value)
+                        }
                         required
                         autoComplete="password_confirmation"
                     />
 
-                    <InputError messages={errors.password_confirmation} className="mt-2" />
+                    <InputError
+                        messages={errors.password_confirmation}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -96,15 +113,15 @@ const UpdatePasswordForm = () => {
                             show={true}
                             enterFrom="opacity-0"
                             leaveTo="opacity-0"
-                            className="transition ease-in-out"
-                        >
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                            className="transition ease-in-out">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                Saved.
+                            </p>
                         </Transition>
                     )}
                 </div>
             </form>
         </section>
-
     )
 }
 

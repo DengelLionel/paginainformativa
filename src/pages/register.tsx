@@ -19,7 +19,7 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<any>()
 
     const submitForm: FormEventHandler = event => {
         event.preventDefault()
@@ -30,7 +30,7 @@ const Register = () => {
             password,
             password_confirmation: passwordConfirmation,
             setErrors,
-            setStatus: () => { }
+            setStatus: () => {},
         })
     }
 
@@ -88,7 +88,10 @@ const Register = () => {
                             autoComplete="new-password"
                         />
 
-                        <InputError messages={errors.password} className="mt-2" />
+                        <InputError
+                            messages={errors.password}
+                            className="mt-2"
+                        />
                     </div>
 
                     {/* Confirm Password */}
@@ -108,7 +111,10 @@ const Register = () => {
                             required
                         />
 
-                        <InputError messages={errors.password_confirmation} className="mt-2" />
+                        <InputError
+                            messages={errors.password_confirmation}
+                            className="mt-2"
+                        />
                     </div>
 
                     <div className="flex items-center justify-end mt-4">

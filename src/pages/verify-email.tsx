@@ -24,16 +24,21 @@ const VerifyEmail = () => {
                 </div>
 
                 {status === 'verification-link-sent' && (
-                    <AuthSessionStatus className="mb-4" status='A new verification link has been sent to the email
-                        address you provided during registration' />
+                    <AuthSessionStatus
+                        className="mb-4"
+                        status="A new verification link has been sent to the email
+                        address you provided during registration"
+                    />
                 )}
 
                 <div className="mt-4 flex items-center justify-between">
                     <PrimaryButton
-                        onClick={() => resendEmailVerification({
-                            setStatus,
-                            setErrors: () => { }
-                        })}>
+                        onClick={() =>
+                            resendEmailVerification({
+                                setStatus,
+                                setErrors: () => {},
+                            })
+                        }>
                         Resend Verification Email
                     </PrimaryButton>
 

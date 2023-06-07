@@ -1,6 +1,5 @@
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
-import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
 import InputError from '@/components/InputError'
@@ -18,7 +17,7 @@ const PasswordReset = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<any>()
     const [status, setStatus] = useState(null)
 
     const submitForm: FormEventHandler = event => {
@@ -34,7 +33,7 @@ const PasswordReset = () => {
     }
 
     useEffect(() => {
-        const email = query && query.email ? query.email as string : ''
+        const email = query && query.email ? (query.email as string) : ''
 
         setEmail(email)
     }, [query.email])
@@ -75,7 +74,10 @@ const PasswordReset = () => {
                             required
                         />
 
-                        <InputError messages={errors.password} className="mt-2" />
+                        <InputError
+                            messages={errors.password}
+                            className="mt-2"
+                        />
                     </div>
 
                     {/* Confirm Password */}
@@ -95,7 +97,10 @@ const PasswordReset = () => {
                             required
                         />
 
-                        <InputError messages={errors.password_confirmation} className="mt-2" />
+                        <InputError
+                            messages={errors.password_confirmation}
+                            className="mt-2"
+                        />
                     </div>
 
                     <div className="flex items-center justify-end mt-4">

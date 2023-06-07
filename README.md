@@ -1,12 +1,15 @@
 # Laravel Breeze - Next.js Edition with TypeScript 🏝️
+
 ## Introduction
 
 ---
+
 **This repository is a refactor of [breeze-next](https://github.com/laravel/breeze-next) by changing programing language from [JavaScript](https://www.javascript.com/) to [TypeScript](https://www.typescriptlang.org/)**
 
 ### Little extras
-* Dark mode support
-* Profile modificatin support - [Laravel Breeze modifications for profile editing](BREEZE_MODIFICATIONS.md)
+
+-   Dark mode support
+-   Profile modificatin support - [Laravel Breeze modifications for profile editing](BREEZE_MODIFICATIONS.md)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://www.buymeacoffee.com/kullarkert)
 

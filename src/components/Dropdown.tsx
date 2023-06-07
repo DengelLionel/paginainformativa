@@ -1,4 +1,4 @@
-import React, { useState, PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 
 interface Props {
@@ -30,15 +30,11 @@ const Dropdown = ({
             break
     }
 
-
     let widthClasses = ''
 
     if (width === '48') {
         widthClasses = 'w-48'
     }
-
-    const [open, setOpen] = useState(false)
-
     return (
         <Menu as="div" className="relative">
             {({ open }) => (

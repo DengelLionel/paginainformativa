@@ -2,7 +2,9 @@ import ApplicationLogo from '@/components/ApplicationLogo'
 import Dropdown from '@/components/Dropdown'
 import Link from 'next/link'
 import NavLink from '@/components/NavLink'
-import ResponsiveNavLink, { ResponsiveNavButton } from '@/components/ResponsiveNavLink'
+import ResponsiveNavLink, {
+    ResponsiveNavButton,
+} from '@/components/ResponsiveNavLink'
 import { DropdownButton } from '@/components/DropdownLink'
 import DropdownLink from '@/components/DropdownLink'
 import { useAuth, User } from '@/hooks/auth'
@@ -123,11 +125,17 @@ const Navigation = (user?: User) => {
                             <div className="font-medium text-base text-gray-800 dark:text-gray-200">
                                 {user?.name}
                             </div>
-                            <div className="font-medium text-sm text-gray-500">{user?.email}</div>
+                            <div className="font-medium text-sm text-gray-500">
+                                {user?.email}
+                            </div>
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href="/profile" active={router.pathname === '/profile'}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href="/profile"
+                                active={router.pathname === '/profile'}>
+                                Profile
+                            </ResponsiveNavLink>
                             <ResponsiveNavButton onClick={logout}>
                                 Logout
                             </ResponsiveNavButton>

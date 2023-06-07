@@ -1,6 +1,7 @@
 # Modifications needed in Laravel Breeze API
 
 ## routes/api.php
+
 ```php
 
 use App\Http\Controllers\Auth\PasswordController;
@@ -16,6 +17,7 @@ Route::middleware(['auth', 'throttle:6,1'])->group(function () {
 ```
 
 ## models/User.php
+
 ```php
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
@@ -40,6 +42,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 ```
 
 ## Controllers/ProfileController.php
+
 ```php
 namespace App\Http\Controllers;
 
@@ -91,6 +94,7 @@ class ProfileController extends Controller
 ```
 
 ## Contollers/Auth/PasswordController.php
+
 ```php
 namespace App\Http\Controllers\Auth;
 

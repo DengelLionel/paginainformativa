@@ -16,7 +16,10 @@ const DropdownLink = ({ children, ...props }: PropsWithChildren<LinkProps>) => (
     </Menu.Item>
 )
 
-export const DropdownButton = ({ children, ...props }: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) => (
+export const DropdownButton = ({
+    children,
+    ...props
+}: PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>) => (
     <Menu.Item>
         {({ active }) => (
             <button

@@ -12,13 +12,13 @@ const UpdateProfileInformationForm = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<any>()
     const [status, setStatus] = useState(null)
 
     useEffect(() => {
         if (user !== undefined) {
-            setName(user.name)
-            setEmail(user.email)
+            setName(user.name || '') // si user.name es undefined, se asigna una cadena vacía
+            setEmail(user.email || '') // si user.email es undefined, se asigna una cadena vacía
         }
     }, [user])
 
@@ -85,29 +85,32 @@ const UpdateProfileInformationForm = () => {
                     <InputError messages={errors.email} className="mt-2" />
                 </div>
 
-                {user?.must_verify_email && user?.email_verified_at === null && (
-                    <div>
-                        <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                            Your email address is unverified.
+                {user?.must_verify_email &&
+                    user?.email_verified_at === null && (
+                        <div>
+                            <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
+                                Your email address is unverified.
+                                <button
+                                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                                    onClick={() =>
+                                        resendEmailVerification({
+                                            setStatus,
+                                            setErrors: () => {},
+                                        })
+                                    }>
+                                    Click here to re-send the verification
+                                    email.
+                                </button>
+                            </p>
 
-                            <button
-                                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                                onClick={() => resendEmailVerification({
-                                    setStatus,
-                                    setErrors: () => { }
-                                })}
-                            >
-                                Click here to re-send the verification email.
-                            </button>
-                        </p>
-
-                        {status === 'verification-link-sent' && (
-                            <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                                A new verification link has been sent to your email address.
-                            </div>
-                        )}
-                    </div>
-                )}
+                            {status === 'verification-link-sent' && (
+                                <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+                                    A new verification link has been sent to
+                                    your email address.
+                                </div>
+                            )}
+                        </div>
+                    )}
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton>Save</PrimaryButton>
@@ -117,15 +120,15 @@ const UpdateProfileInformationForm = () => {
                             show={true}
                             enterFrom="opacity-0"
                             leaveTo="opacity-0"
-                            className="transition ease-in-out"
-                        >
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                            className="transition ease-in-out">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                Saved.
+                            </p>
                         </Transition>
                     )}
                 </div>
             </form>
         </section>
-
     )
 }
 

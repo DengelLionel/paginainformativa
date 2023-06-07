@@ -23,11 +23,11 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<any>()
     const [status, setStatus] = useState<string | null>(null)
 
     useEffect(() => {
-        const reset = query && query.reset ? query.reset as string : ''
+        const reset = query && query.reset ? (query.reset as string) : ''
         if (reset.length > 0 && errors.length === 0) {
             setStatus(atob(reset))
         } else {
@@ -35,7 +35,7 @@ const Login = () => {
         }
     })
 
-    const submitForm: FormEventHandler = async (event) => {
+    const submitForm: FormEventHandler = async event => {
         event.preventDefault()
 
         login({
@@ -88,7 +88,10 @@ const Login = () => {
                             autoComplete="current-password"
                         />
 
-                        <InputError messages={errors.password} className="mt-2" />
+                        <InputError
+                            messages={errors.password}
+                            className="mt-2"
+                        />
                     </div>
 
                     {/* Remember Me */}
@@ -96,7 +99,6 @@ const Login = () => {
                         <label
                             htmlFor="remember_me"
                             className="inline-flex items-center">
-
                             <Checkbox
                                 id="remember_me"
                                 name="remember"

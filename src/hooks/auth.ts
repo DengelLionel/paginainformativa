@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import axios, { csrf } from '@/lib/axios'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 declare type AuthMiddleware = 'auth' | 'guest'
@@ -29,9 +29,13 @@ export interface User {
 export const useAuth = ({ middleware, redirectIfAuthenticated }: IUseAuth) => {
     const router = useRouter()
 
-    const { data: user, error, mutate } = useSWR<User>('/api/user', () =>
+    const {
+        data: user,
+        error,
+        mutate,
+    } = useSWR<User>('/api/userr', () =>
         axios
-            .get('/api/user')
+            .get('/api/userr')
             .then(res => res.data)
             .catch(error => {
                 if (error.response.status !== 409) throw error
@@ -127,17 +131,21 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: IUseAuth) => {
     }
 
     useEffect(() => {
-        const defaultRedirect = '/ruta-predeterminada'; // Coloca aquí la ruta que prefieres usar como predeterminada.
-    
+        const defaultRedirect = '/ruta-predeterminada' // Coloca aquí la ruta que prefieres usar como predeterminada.
+
         if (middleware === 'guest' && redirectIfAuthenticated && user)
-            router.push(redirectIfAuthenticated);
+            router.push(redirectIfAuthenticated)
         if (
             window.location.pathname === '/verify-email' &&
             user?.email_verified_at
         )
-            router.push(redirectIfAuthenticated !== undefined ? redirectIfAuthenticated : defaultRedirect);
-        if (middleware === 'auth' && error) logout();
-    }, [user, error]);
+            router.push(
+                redirectIfAuthenticated !== undefined
+                    ? redirectIfAuthenticated
+                    : defaultRedirect,
+            )
+        if (middleware === 'auth' && error) logout()
+    }, [user, error])
     return {
         user,
         register,
